@@ -40,7 +40,7 @@ class Solution:
             return False
         else:
             mapping[key] = value  # Otherwise, store the tuple (i, j) as the value
-        mapping = {}
+    mapping = {}
     for i in range(3, 6):
        for j in range(0,3):
         key = board[i][j]
