@@ -14,13 +14,13 @@ class Solution:
             que.append( (i,j) )
             while que:
                   m,n = que.pop(0) 
-                  grid[m][n] = "M"
-
-                  directions = [[1,0],[-1,0],[0,1],[0,-1]]
-                  for dr,dc in directions:
-                    r,c = m + dr, n + dc
-                    if 0 <=r <  len(grid) and  0  <=c  < len(grid[0]) and grid[r][c]=='1':
-                        que.append((r,c))
+                  if 0 <= m < len(grid) and  0  <= n < len(grid[0]) and grid[m][n]=='1':
+                    grid[m][n] = "M"
+                    que.append((m,n)) 
+                    directions = [[1,0],[-1,0],[0,1],[0,-1]]
+                    for dr,dc in directions:
+                       r,c = m + dr, n + dc
+                       que.append((r,c))
                   
         
             # directions = [[1,0],[-1,0],[0,1],[0,-1]]
