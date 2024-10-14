@@ -14,16 +14,20 @@ class Solution:
             return largestA 
                   
         maxSum = -1
-        maping = defaultdict(list)
-        for i in range(n):
-            maping[check( nums[i] )].append( nums[i] )
+        maping = defaultdict(int)
+        for i in nums:
+            maxI = max(str(i))
+            if maxI in maping:
+               maxSum = max( maping[maxI]+i, maxSum)
+            maping[maxI] = max( i ,  maping[maxI] )
+            
         # print(maping)
         
-        for value in maping.values():
-            if len(value)>=2:
-                m1 = max(value)
-                value.remove(m1)
-                m2 = max(value)
-                maxSum = max(maxSum, m1 + m2)
+        # for value in maping.values():
+        #     if len(value)>=2:
+        #         m1 = max(value)
+        #         value.remove(m1)
+        #         m2 = max(value)
+        #         maxSum = max(maxSum, m1 + m2)
         return maxSum
         
