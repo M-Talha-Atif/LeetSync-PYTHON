@@ -14,8 +14,7 @@ class Solution:
               if head.val in data:
                  if head == starting:
                     starting = starting.next
-                    prev = starting
-                    
+                    # prev = starting   
                  else:
                     prev.next = head.next 
               else:
