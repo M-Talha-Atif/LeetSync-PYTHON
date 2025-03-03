@@ -25,8 +25,8 @@ class Solution:
 
         water = 0
         rightMax.reverse()
-        print(leftMax)
-        print(rightMax)
+        # print(leftMax)
+        # print(rightMax)
         for i in range(len(height)):
               local = min(leftMax[i],rightMax[i]) - height[i]
               water  +=local
