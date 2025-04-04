@@ -17,6 +17,10 @@ class KthLargest {
              minHeap.offer(val);
         }
         else if (minHeap.peek() < val ){
+            // adding value , current peek
+            System.out.println("Adding value: "+ String.valueOf(val));
+            System.out.println("Current Peek: "+minHeap.peek().toString());
+
             minHeap.poll();
             minHeap.offer(val);
 
