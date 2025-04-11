@@ -17,7 +17,7 @@ class Solution {
 			
     	int result=0;
     	for (int i=0;i<n;i++) {
-    		int num= 0;
+    		int num= 1;
     		for (int j=0;j<m;j++) {
     			PriorityQueue<Integer> pq=list.get(j);
     			int temp = pq.poll();
