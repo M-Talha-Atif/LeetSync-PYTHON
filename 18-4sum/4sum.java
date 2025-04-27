@@ -17,11 +17,7 @@ class Solution {
 
         for(int i=0; i < n; i++){
 
-            // if( i<n-3 && nums[i]+nums[i+1]+nums[i+2]+nums[i+3]>target)break;
-
-            // if(nums[i]+nums[n-1]+nums[n-2]+nums[n-3]<target)
-            //  continue; //first candidate too small
-
+    
             if(i>0 && nums[i-1] == nums[i]){
                 continue; // a duplicate
             }
