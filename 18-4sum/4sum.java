@@ -36,7 +36,7 @@ class Solution {
             // -5,-4, 10,20 skipp as target let say is 30
             // -5-4 + 10 + 20 is 21 so skip this, pre condition based skip
             // pruning
-            // if(nums[i]+nums[j]+nums[n-1]+nums[n-2]<target)continue;
+            if(nums[i]+nums[j]+nums[n-1]+nums[n-2]<target)continue;
 
             if(j>i+1 && nums[j-1] == nums[j]){
                 continue; // b duplicate
