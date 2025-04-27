@@ -25,7 +25,6 @@ class Solution {
 
             for(int j=i+1; j < n ; j++){
 
-            // if(j<n-2 && nums[i]+nums[j]+nums[j+1]+nums[j+2]>target)break; 
 
         
             // why skipping this
