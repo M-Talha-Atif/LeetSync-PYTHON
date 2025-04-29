@@ -1,5 +1,6 @@
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
+        // s1 length fixed
         if (s1.length() > s2.length()){
                 return false;
         }
@@ -23,13 +24,13 @@ class Solution {
         
         // done till s1.length
         for (int right= s1.length(); right<s2.length(); right++){
-            // Increase window
+            // Increase window, add new character
             char rightChar = s2.charAt(right);
 
             s2Freq.put(rightChar, s2Freq.getOrDefault(rightChar,0)  + 1  );
 
 
-            // Shrink Window
+            // Shrink Window, remove old character
             char leftChar = s2.charAt(left);
 
             s2Freq.put(leftChar, s2Freq.get(leftChar)  -  1);
