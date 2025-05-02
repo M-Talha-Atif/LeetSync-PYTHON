@@ -42,7 +42,7 @@ class MyQueue {
 
             gotList.add(element);
 
-            top  = popped;
+            top  = popped; // previous element than popped
 
             popped = element;
         }
@@ -54,7 +54,14 @@ class MyQueue {
         // 5 4 3 2 -- 1
         //  
         // 6 5 4 3 2 
-        System.out.println(gotList);
+        // skip element from last one
+
+        // stack like 1 2 3 4 5
+        // in list 5 4 3 2 1
+        // so start from 2nd last by skipping last element and go upto the end till 5
+        // 2 3 4 5 -> again stack like 2 3 4 5
+        // top is 5
+        // System.out.println(gotList);
         for(int i=gotList.size() - 2; i >= 0 ; i--) {
             int element = gotList.get(i);
 
