@@ -1,23 +1,35 @@
 class MinStack {
-    PriorityQueue<Integer> data;
+    int myMin = Integer.MAX_VALUE;
     Stack<Integer> myStack;
+
+    // current value is maintained with previous minimum
 
 
     public MinStack() {
-        data = new PriorityQueue<Integer>();
+        
         myStack = new Stack<Integer>();
     }
     
     public void push(int val) {
-        data.offer(val);
+        if(val<=myMin){
+         myStack.push(myMin);
+         myMin = val; // update the minimum
+
+        }
+        
         myStack.push(val);
+
+        // System.out.println(myStack);
         
     }
     
     public void pop() {
         
         int popped = myStack.pop();
-        data.remove(popped);
+        if(popped == myMin){
+            myMin = myStack.pop();
+        }
+
     }
     
     public int top() {
@@ -26,7 +38,7 @@ class MinStack {
     
     public int getMin() {
 
-        return data.peek();
+        return myMin;
         
     }
 }
