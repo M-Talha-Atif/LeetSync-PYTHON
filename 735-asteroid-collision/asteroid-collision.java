@@ -6,6 +6,8 @@ class Solution {
         
         int n = asteroids.length;
 
+        // All is about IF ELSE
+
         for( int i=1; i<n ; i+=1)
         { 
             if ( asteroids[i] < 0) 
@@ -75,6 +77,10 @@ class Solution {
         int[] arr = new int[data.size()];
         for (int i = 0; i < arr.length; i++) {
              arr[i] = data.get(i); // Direct access without popping
+        }
+
+        while(!data.isEmpty()){
+            data.pop(); // free memory
         }
 
         return arr;
