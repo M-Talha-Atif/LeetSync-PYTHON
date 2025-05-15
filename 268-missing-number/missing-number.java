@@ -13,17 +13,15 @@ class Solution {
         }
       
 
-        
-        Arrays.sort(nums);
+        int res = n;
        
         for(int i=0; i<n; i+=1){
          
-            if ( nums[i] != i ){
-                return i;
-            }
+            res ^= i;
+            res ^= nums[i];
         }
 
-        return nums[ n-1 ] + 1;
+        return res;
         
     }
 }
