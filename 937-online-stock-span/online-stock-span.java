@@ -6,8 +6,13 @@ class StockSpanner {
         stack = new Stack<>();
         
     }
+    // key-value
+
+    // key price , res prices less than key, monotonic stack
+    // next values less than key
     
     public int next(int price) {
+        // storing the result after the loop
         int res = 1;
 
         while(  !stack.isEmpty() && stack.peek()[0]  <= price ){
