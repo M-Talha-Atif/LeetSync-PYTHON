@@ -10,7 +10,7 @@ public class Solution {
 
         for ( int i=0; i<32; i++ ){
             result <<= 1; // left shift by 1 to add zero
-            if ( ( n & 1 )  == 1) result++;
+            result += n&1;
             n >>= 1; // right shift by 1 to remove LSB (least significant bit)
         }
 
