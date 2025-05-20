@@ -14,6 +14,7 @@
  * }
  */
 class Solution {
+    // base condition -> when true, when false else check for all nodes
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if (p==null && q==null) return true;
         if ( (p==null && q!=null) || (q==null && p!=null) || (p.val!=q.val) ) return false;
