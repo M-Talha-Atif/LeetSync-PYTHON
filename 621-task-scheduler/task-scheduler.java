@@ -6,13 +6,18 @@ class Solution {
         for(char c : tasks){
             counter.put(c, counter.getOrDefault(c, 0) + 1);
         }
+
+
         PriorityQueue<Integer> data = new PriorityQueue<Integer>( (  (a,b) -> b-a )  );
+
         for(Integer val : counter.values()){
            System.out.print(val);
             if(val>0){
                data.offer(val);
             }
         }
+
+        
         while(!data.isEmpty()){
             List<Integer> temp = new LinkedList<Integer>();
             // n+1 tasks gets solved first
