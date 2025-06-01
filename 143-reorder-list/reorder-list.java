@@ -17,8 +17,11 @@ class Solution {
             slow = slow.next;
             fast = fast.next.next;
         }
+        // 1->2 ->3 -> 4
 
-        ListNode prev = reverseList(slow.next);
+       
+
+        ListNode prev = reverseList(slow.next);  // 4->3
 
         slow.next = null;
 
@@ -31,8 +34,11 @@ class Solution {
         ListNode leftNext = null , rightNext = null;
 
         while( leftPart!=null && rightPart!=null ){
+            // save both next nodes
             leftNext  = leftPart.next;
             rightNext = rightPart.next;
+
+            // poin out to the node
 
             leftPart.next = rightPart;
             leftPart = leftNext;
