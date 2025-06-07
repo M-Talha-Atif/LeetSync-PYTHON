@@ -55,11 +55,15 @@ class Solution {
 
     }
 
+    
 
+    // if size == 0 then all characters done in a cycle
 
     if  (pq.size() == 0){
         return res;
     }
+
+    // last character remaining
 
     else if (pq.size() == 1) {
 
@@ -73,6 +77,13 @@ class Solution {
         }
         
     }
+
+    // Most freuqent two chracters
+    // aab
+
+    // heap -> a:2, b:1
+    // first iteration, ab formed, b:0, a:1, heap only having a now
+    // out of loop, as size is 1, and make sure chracter has frequency of 1 and then process it otherwise no 
 
 
     return "";
