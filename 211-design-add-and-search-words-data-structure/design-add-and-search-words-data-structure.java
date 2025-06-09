@@ -41,7 +41,7 @@ class WordDictionary {
             current = current.children[c - 'a'];
         }
 
-        
-        return current != null && current.leafNode;
+
+        return current.leafNode;
     }
 }
