@@ -1,30 +1,34 @@
 class Solution {
-    public List<List<Integer>> permute(int[] nums) {
-        
-         List<List<Integer>> data = new ArrayList<> ();
-         backTrack(data, new ArrayList<>(),nums);
+    List<List<Integer>> result;
+    // Permutation m n size k mutabak list utahni subset se
+    public List<List<Integer>> permute(int[] nums) 
+    {
+        result = new ArrayList<>();
 
-         return data;
+
+        solve(nums,  new ArrayList<>() , nums.length);
+
+        return result;
+        
     }
 
-      private void backTrack(List<List<Integer>> data, List<Integer> temp, int[] nums){
-        if(temp.size() == nums.length){
-            data.add(new ArrayList<>( temp ));
-        }
-        else {
+    public void solve(int[] nums, List<Integer> temp , int n)
+       {
 
-            for(int i= 0; i<nums.length; i+=1){
+        if (temp.size() == n){
+            result.add(new ArrayList<>( temp ));
+            return;
+        }
+
+        for(int i=0; i<nums.length; i+=1){
+
             if( temp.contains(nums[i])) continue;
 
-            temp.add(nums[i]);
+            temp.add(nums[i]); // take
 
-            backTrack(data, temp, nums);
+            solve(  nums, temp, n); // process
 
-            temp.remove( temp.size() - 1 );
+            temp.remove( temp.size() - 1 ); // remove again explore
         }
-        }
-           
-
-     
     }
 }
