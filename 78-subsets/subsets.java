@@ -1,23 +1,25 @@
 class Solution {
+    List<List<Integer>> result;
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> data = new ArrayList<>();
 
 
-        backTrack(data,new ArrayList<>(),nums, 0);
+        result = new ArrayList<>();
+        // take, explore, not take, explore
+        solve(nums, 0, new ArrayList<>());
 
-        return data;
-        
+        return result;
         
     }
-    private void backTrack(List<List<Integer>> data, List<Integer> temp, int[] nums, int start){
-        data.add(new ArrayList<>( temp ));
 
-        for(int i=start; i<nums.length; i+=1){
-            temp.add(nums[i]);
+    public void solve(int[] nums, int index, List<Integer> temp ){
+        result.add(new ArrayList<>( temp ));
 
-            backTrack(data, temp, nums, i + 1);
+        for(int i=index; i<nums.length; i+=1){
+            temp.add(nums[i]); // take
 
-            temp.remove( temp.size() - 1 );
+            solve(  nums, i + 1, temp); // process
+
+            temp.remove( temp.size() - 1 ); // remove again explore
         }
     }
 }
