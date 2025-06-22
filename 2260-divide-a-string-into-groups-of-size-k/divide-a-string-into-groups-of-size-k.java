@@ -1,6 +1,8 @@
 class Solution {
     public String[] divideString(String s, int k, char fill) {
         // k - k
+        // Formula to divide in group of strings
+        // total groups ---->  n+k-1 divide by k
         int n = s.length();
         int totalGroups = (n+k-1) / k;
         String[] res = new String[totalGroups];
