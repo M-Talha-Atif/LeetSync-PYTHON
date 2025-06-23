@@ -4,12 +4,10 @@
  */
  
 var createCounter = function(n) {
-    let counter = n-1;
     
     return function() {
-        // has access from createCounter function scope
-        counter++;
-        return counter;
+    
+        return n++;
         
     };
 };
