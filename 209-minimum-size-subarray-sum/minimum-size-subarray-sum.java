@@ -1,32 +1,22 @@
 class Solution {
     public int minSubArrayLen(int target, int[] nums) {
-
-        // length minimum
-        // sum greater than  or equal to target 
-        // count less than sum
         int left = 0;
-        int currSum = 0;
-        int len = 100000;
-        int n = nums.length;
-
-        for(int right=0; right < nums.length; right+=1){
-
-            currSum += nums[right];
-
-            while(currSum>=target){
-                currSum-=nums[left];
-                left+=1;
-                len = Math.min(len, right - left + 1);
+        int n = nums.length - 1;
+        int totalLength = 10000000;
+        // minimal length
+        // 2,3,1,2
+        // inside while calculate length
+        int sum = 0;
+        for (int right = 0; right<=n; right++ )
+        { 
+            sum+= nums[right];
+            while( sum>= target){
+                totalLength = Integer.min(totalLength, right - left + 1);
+                sum-=nums[left];
+                left++;
             }
-
         }
-
-        if(len == 100000)
-           return 0;
-
-        return len+1;
+        return totalLength==10000000 ? 0 : totalLength;
         
     }
-
-
 }
