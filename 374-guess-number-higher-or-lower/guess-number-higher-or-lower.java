@@ -32,7 +32,7 @@ public class Solution extends GuessGame {
 
         }
 
-        return left;
+        return right;
 
         
     }
