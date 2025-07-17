@@ -15,12 +15,12 @@ class Solution {
         int right = x;
         int mid = -1;
 
-        while (left <= right){
+        while (left < right){
             mid = left + (right - left) / 2;
             System.out.println(mid);
             int target = mid * mid;
             if ( (long) mid * mid > (long) x){
-                right = mid - 1;
+                right = mid;
             }
             else if ( target == x ){
                 return mid;
@@ -32,6 +32,6 @@ class Solution {
 
         }
         
-        return right;
+        return (long)right*right > (long)x ? right - 1 : right;
     }
 }
