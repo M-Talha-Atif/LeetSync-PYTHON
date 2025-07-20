@@ -1,58 +1,49 @@
 class Solution {
-    public int shipWithinDays(int[] weights, int days) {
-  
-  
-        int right = 0;
-        int maxi = Integer.MIN_VALUE;
-        for(int weight : weights){
-            right+=weight;
-            maxi = Math.max(maxi, weight);
-        }
-        int left = maxi;
 
-        while (left < right ){
-            int capacity = left + (right - left) / 2;
-            // System.out.println("-----------"    );
-            // System.out.println("-----------"    );
+    public static boolean canLoad ( int[] weights, int days, int capacity){
+        // initial set day to 1 for first round of loading weights
+        int countDays = 1;
+        int countCapacity = 0;
 
-            // System.out.println("Capacity : " + capacity   );
-
-            if ( checkCapacity(weights, days, capacity) == true ) {
-                right = capacity;
-            }
-            else {
-                left = capacity + 1;
-            }
-        }
-
-        return left; // smaller capacity element always on left
-
-        
-    }
-
-    public boolean checkCapacity(int[] weights, int days, int capacity){
-       int curr = 0;
-       days-=1;
-      
-       for(int weight : weights){
-        //    System.out.println("Weight Element : " + weight   );
-           curr += weight;
-           if (curr > capacity){
-            //   System.out.println("Current calculated : " + curr   );
-              curr = weight;
-              days-=1;
-
-              if ( days < 0 ) return false;
-           }
+        for(int weight : weights)
+        {   countCapacity += weight;
+            if ( countCapacity > capacity ) {
+                 countCapacity = weight;
+                 countDays+=1;
+                 if ( countDays > days){
+                    return false;
+                 }
+             }
             
         }
 
+        return countDays <= days;
+    }
+    public int shipWithinDays(int[] weights, int days) {
+        // total weight we can load maximum in one day
+        // weight would be minimum to load all packages within 5 days
+        // so weight to be search space
+        // maximum can be minimum search space to load weights
+        // capacity minimum -> maximum weight
+        // capacity maximum -> sum of all weights
+        int right = 0;
+        int left = Integer.MIN_VALUE;
+        for(int weight : weights){
+            right+=weight;
+            left  = Math.max( left , weight);
+        }
+        while ( left < right ){
+            int mid =  left + (right - left) / 2;
+            boolean result = canLoad(weights,days,mid);
+            if ( result == false){
+                // increase capacity
+                left = mid + 1;
+            }
+            else {
+                right = mid;
+            }
+        }
 
-        // System.out.println("Days calculated : " + days   );
-        // System.out.println("-----------"    );
-        // System.out.println("-----------"    );
-
-        return days>=0;
-
+        return right;  
     }
 }
