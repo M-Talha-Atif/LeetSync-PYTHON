@@ -19,6 +19,9 @@ class Solution {
             if ( factor == 0 && target == mid ){
                 return true;
             }
+            // target needs to be reduced, so move left
+            // why because it will reduce search space from left because
+            // division with large numbers gives small answer
             else if ( target > mid ){
                 left = mid + 1;
                 
