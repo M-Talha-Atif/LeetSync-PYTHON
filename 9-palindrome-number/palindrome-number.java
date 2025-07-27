@@ -1,6 +1,6 @@
 class Solution {
     public boolean isPalindrome(int x) {
-
+        
         if(x<0) return false;
 
         var i = 0; // i will hold opposite of x like 12 then here 21
