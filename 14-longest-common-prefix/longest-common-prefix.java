@@ -18,7 +18,7 @@ class Solution {
 
       
         System.out.println(strs[0]);
-        
+
         int startLength = 0;
         String firstString = strs[0];
         int n = strs.length;
