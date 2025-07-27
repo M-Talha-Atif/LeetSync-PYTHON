@@ -1,30 +1,26 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        Map<Integer,Integer> frequency = new HashMap<>();
-        int n = nums.length;
+        HashMap<Integer,Integer> data = new HashMap<Integer,Integer>();
+        int[] resultIndexes = new int[2];
+        // 2,7
 
-        // a + b = target 
-        // target - a = b
-        // target would be greater than a+b or either equals to a or b
-
-        int[] result = new int[2];
-
-        for(int index =0; index<n; index++){
-            int current = nums[index];
-            int checker = target - current;
-
-            if(frequency.containsKey(  checker )){
-                result[0] = frequency.get(checker);
-                result[1] = index;
-                break;
+        for( int i=0; i<nums.length; i+=1 )
+        { 
+            int n = nums[i];
+            int check = target - n;
+            // -1 because 0 to n filled by indexes
+            int fetched = data.getOrDefault(check,-1);
+            if ( fetched != -1  ){
+               resultIndexes [0] = fetched;
+               resultIndexes [1] = i;
+               return resultIndexes ;
             }
+            data.put( n,  data.getOrDefault(n,i)  );
 
- 
-            frequency.put( current, frequency.getOrDefault(current, index) );
 
         }
 
-        return result;
+        return resultIndexes ;
         
     }
 }
