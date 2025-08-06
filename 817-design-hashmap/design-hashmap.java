@@ -1,37 +1,86 @@
-class MyHashMap {
-
-    /* 
-    For simplicity, are the keys integers only?
-    For collision resolution, can we use chaining?
-    Do we have to worry about load factors?
-    Can we assume inputs are valid or do we have to validate them?
-    Can we assume this fits memory?
-    */
-
-    int[] data;
-
-    public MyHashMap() {
-        data = new int[1000001];
-        Arrays.fill(data, -1);
-    }
-
-    public void put(int key, int val) {
-        data[key] = val;
-    }
-
-    public int get(int key) {
-        return data[key];
-    }
-
-    public void remove(int key) {
-        data[key] = -1;
+class ListNode {
+    int key;
+    int value;
+    ListNode next;
+    
+    public ListNode(int key, int value) {
+        this.key = key;
+        this.value = value;
+        this.next = null;
     }
 }
 
-/**
- * Your MyHashMap object will be instantiated and called as such:
- * MyHashMap obj = new MyHashMap();
- * obj.put(key,value);
- * int param_2 = obj.get(key);
- * obj.remove(key);
- */
+class MyHashMap {
+    private static final int SIZE = 100000; // Smaller size for simplicity
+    private ListNode[] buckets;
+    
+    public MyHashMap() {
+        buckets = new ListNode[SIZE];
+    }
+    
+    // Simple hash function
+    private int hash(int key) {
+        return key % SIZE;
+    }
+    
+    public void put(int key, int value) {
+        int index = hash(key);
+        
+        // If bucket is empty, just add new node
+        if (buckets[index] == null) {
+            buckets[index] = new ListNode(key, value);
+            return;
+        }
+        
+        // Otherwise, check if key exists
+        ListNode current = buckets[index];
+        ListNode prev = null;
+        
+        while (current != null) {
+            if (current.key == key) {
+                // Update existing key
+                current.value = value;
+                return;
+            }
+            prev = current;
+            current = current.next;
+        }
+        
+        // Key doesn't exist, add to end of list
+        prev.next = new ListNode(key, value);
+    }
+    
+    public int get(int key) {
+        int index = hash(key);
+        ListNode current = buckets[index];
+        
+        while (current != null) {
+            if (current.key == key) {
+                return current.value;
+            }
+            current = current.next;
+        }
+        
+        return -1; // Not found
+    }
+    
+    public void remove(int key) {
+        int index = hash(key);
+        ListNode current = buckets[index];
+        ListNode prev = null;
+        
+        while (current != null) {
+            if (current.key == key) {
+                if (prev == null) {
+                    // Remove head of list
+                    buckets[index] = current.next;
+                } else {
+                    prev.next = current.next;
+                }
+                return;
+            }
+            prev = current;
+            current = current.next;
+        }
+    }
+}
