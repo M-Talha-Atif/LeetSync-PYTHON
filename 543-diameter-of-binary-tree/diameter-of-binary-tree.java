@@ -14,20 +14,32 @@
  * }
  */
 class Solution {
-    int ans = 0;
-     public  int height(TreeNode root) {
-        if (root==null) return 0;
-        int maxL =  height(root.left);
-        int maxR =  height(root.right);
-        this.ans = Math.max(this.ans, maxL+maxR);
-        return Math.max(maxL,maxR) + 1;
-        // 1 for current node
-        
-    }
+    // height function
+    // left tree height + right tree height'
+    // maximum take due to any root can hold value of diameter
+    private int ans = 0;
+
     public int diameterOfBinaryTree(TreeNode root) {
+        // every sub tree can give answer
+        // edge case : root having left only one node and at right many nodes as a subtree
+        if (root == null){
+            return 0;
+        }
         height(root);
 
-        return this.ans;
+        return ans;
+
         
+    }
+
+    public int height(TreeNode root){
+        if ( root == null){
+            return 0;
+        }
+
+        int maxLeft  =  height( root.left );
+        int maxRight =  height( root.right );
+        ans = Math.max(this.ans, maxLeft+maxRight);
+        return Math.max(maxLeft,maxRight) + 1;
     }
 }
