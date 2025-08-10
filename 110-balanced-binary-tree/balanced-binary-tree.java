@@ -14,31 +14,41 @@
  * }
  */
 class Solution {
-    public int maxDepth(TreeNode root){
-        // base case
-        if (root==null) return 0;
-        // recurssion
-        int maxL = maxDepth(root.left);
-        int maxR = maxDepth(root.right);
-        return Math.max(maxL,maxR) + 1;
-    }
-    
-    public boolean checkBalanced(TreeNode root) {
-        if (root==null) return true;
+    // depth for each node
+    // comparing then
+    private boolean result = true;
+    public boolean isBalanced(TreeNode root) {
+        if (root == null){
+            return true;
+        }
         
-        int took1 = maxDepth(root.left);
-        int took2 = maxDepth(root.right);
-        if (Math.abs(took1-took2)>1){
+        int maxLeft = maxDepth( root.left );
+        int maxRight = maxDepth( root.right );
+        int difference = Math.abs(maxLeft - maxRight);
+        if ( difference > 1){
             return false;
         }
-        // explore for every node
-        return checkBalanced(root.left) && checkBalanced(root.right);
-    }
 
-    public boolean isBalanced(TreeNode root) {
-        if (root==null) return true;
 
-    
-        return checkBalanced(root);
+        boolean a1 = isBalanced(root.left);
+        boolean a2 = isBalanced(root.right);
+
+        return a1 == true && a2 == true;
+        
+    } 
+
+    public int maxDepth(TreeNode root) {
+        // check the last nodes as a case
+        // take node as a explore case 
+        // max left or max right
+        // each node counts as 1
+        
+        if ( root == null){
+            return 0;
+        }
+        int maxLeft = maxDepth( root.left );
+        int maxRight = maxDepth( root.right );
+
+        return Math.max(maxLeft,maxRight) + 1;
     }
 }
