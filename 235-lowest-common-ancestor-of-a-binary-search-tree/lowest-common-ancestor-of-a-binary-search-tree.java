@@ -9,23 +9,31 @@
  */
 
 class Solution {
-
+    // node will be returned so storing the node will be here
+    // node value if greater than both p,q then recurs to left
+    // node value if less than both p,q then recurs to right
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-           if (root==null) return root;
+        if (root == null){
+            return root;
+        }
+        // conditions on matching
+        if ( root.val > p.val && root.val > q.val){
+            // look for smaller
+            TreeNode left = lowestCommonAncestor( root.left, p, q);
+            if  (left!=null ){
+                return left;
+            }
+        }
+        else if ( root.val < p.val && root.val < q.val){
+            // look for greater
+            TreeNode right = lowestCommonAncestor( root.right, p, q);
+            if  ( right !=null )
+            {
+                return  right;
+            }
+        }
 
-           // value found ni hue to recursion marty rhu
+        return root;
         
-           if (root.val>p.val && root.val>q.val){
-             TreeNode left =  lowestCommonAncestor(root.left,  p, q);
-             if (left!=null) return left;
-           }
-           
-           if (root.val<p.val && root.val<q.val){
-              TreeNode right = lowestCommonAncestor(root.right,  p, q);
-              if (right!=null) return right;
-           }
-        // found value pa return krdu result
-           return root;
-
     }
 }
