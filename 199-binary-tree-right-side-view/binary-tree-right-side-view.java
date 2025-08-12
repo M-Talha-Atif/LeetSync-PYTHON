@@ -14,33 +14,40 @@
  * }
  */
 class Solution {
-    
     public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> data = new LinkedList<Integer>();
         Queue<TreeNode> que = new LinkedList<>();
-        if (root==null) return data;
-        que.offer(root);
-        while(! que.isEmpty()){
-            
-            int size = que.size();
-            // insert right then left
-            for (int i =0; i<size; i+=1){
-                TreeNode current = que.poll();
-                if (i==0) {  data.add(current.val);  }
-
-                  if(current.right!=null) {
-                  que.offer(current.right);
-            }
-                if (current.left!=null){
-                que.offer(current.left);
-            }
+        List<Integer> level = new LinkedList<Integer>();
+        // add nodes in the que
+        if (root!=null)
+           que.offer(root);
            
-
-            }
+        while ( !que.isEmpty() ){
             
-           
+            int countNodes = que.size();
+            for ( int i=0; i<countNodes;  i++){
+
+                // need to acces only right side
+
+                if ( i == 0){
+                    // explored node adding in list
+                    level.add (  que.peek().val );
+                }
+                // add its children in the que
+                if ( que.peek().right != null ){
+                    que.add( que.peek().right  );
+                }
+                if ( que.peek().left != null ){
+                    que.add( que.peek().left  );
+                }
+
+                que.poll();
+               
+              
+            }
+
         }
-        return data;
+
+        return level;
         
     }
 }
