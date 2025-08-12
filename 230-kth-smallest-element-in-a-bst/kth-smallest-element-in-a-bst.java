@@ -14,20 +14,21 @@
  * }
  */
 class Solution {
-    List<Integer> data = new LinkedList<>();
-    public void check(TreeNode root) {
-        if (root==null) return;
-        check(root.left);
-        data.add(root.val);
-        check(root.right);
-    }
-
-
     public int kthSmallest(TreeNode root, int k) {
+        // use stack, in order traversal
+        Stack<TreeNode> data = new Stack<TreeNode>();
+        while (root!=null || !data.isEmpty()){
+            while (root!=null){
+                data.push(root);
+                root = root.left;
+            }
+            root = data.pop(); // new root node
+            if (--k == 0 ) return root.val;
+            root = root.right;
+        }
 
-        check(root);
+        return data.pop().val;
 
-        return data.get(k-1);
         
     }
 }
