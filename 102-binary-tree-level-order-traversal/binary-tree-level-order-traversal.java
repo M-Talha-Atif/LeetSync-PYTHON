@@ -14,32 +14,37 @@
  * }
  */
 class Solution {
+    // every node added in que, its children being added in the que and node in the list
     public List<List<Integer>> levelOrder(TreeNode root) {
-         Queue<TreeNode> queue = new LinkedList<>();
-         List<List<Integer>> explored = new LinkedList<List<Integer>>();
-         if(root==null) return explored;
-         // offer, poll to remove
-         queue.offer(root);
-         while(!queue.isEmpty()){
-            int countNodes = queue.size();
-            List<Integer> localList = new LinkedList<Integer>();
 
-            for(int i = 0; i<countNodes; i+=1){
-            // add childs of current node in queue
+        Queue<TreeNode> que = new LinkedList<>();
+        List<List<Integer>> levels = new LinkedList<List<Integer>>();
 
-            if (queue.peek().left!=null) queue.offer(queue.peek().left);
-            if (queue.peek().right!=null) queue.offer(queue.peek().right);
-            // remove the current node and add its value in list
-            localList.add(queue.poll().val);
 
+        // add nodes in the que
+        if (root!=null)
+           que.offer(root);
+           
+        while ( !que.isEmpty() ){
+            List<Integer> level = new LinkedList<Integer>();
+            int countNodes = que.size();
+            for ( int i=0; i<countNodes;  i++){
+
+                // add its children in the que
+                if ( que.peek().left != null ){
+                    que.add( que.peek().left  );
+                }
+                if ( que.peek().right != null ){
+                    que.add( que.peek().right  );
+                }
+                // explored node adding in list
+                level.add (  que.poll().val );
             }
-            explored.add(localList);
+            levels.add(level);
 
-         }
+        }
 
-         return explored;
-
-
+        return levels;
         
     }
 }
