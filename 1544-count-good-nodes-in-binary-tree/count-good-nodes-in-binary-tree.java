@@ -15,22 +15,26 @@
  */
 class Solution {
     int count = 0;
-     public void goodNodes(TreeNode root, int currMax) {
-            if(root==null) return;
-            if (root.val>=currMax){
-                count+=1;
-            }
-            goodNodes(root.left, Math.max(root.val,currMax));
-            goodNodes(root.right, Math.max(root.val,currMax));
-    }
 
     public int goodNodes(TreeNode root) {
-        if (root==null) return 1;
-
-        goodNodes(root,root.val);
-
-
+        if (root == null ){
+            return 1;
+        }
+        goodNodes( root, root.val);
         return count;
-  
+      
+    }
+    public void goodNodes(TreeNode root, int currentMaximum) {
+        if (root == null ){
+            return;
+        }
+        if  (root.val>=currentMaximum ){
+            count+=1;
+        }
+        int passingValue = Math.max( currentMaximum, root.val );
+
+        goodNodes(root.left,passingValue);
+        goodNodes(root.right,passingValue);
+      
     }
 }
