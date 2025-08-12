@@ -14,24 +14,30 @@
  * }
  */
 class Solution {
-    List<Integer> data = new LinkedList<>();
-    public void check(TreeNode root) {
-        if (root==null) return;
-        check(root.left);
-        data.add(root.val);
-        check(root.right);
-    }
-
+    // in order traversal
+    // storing the prev node
+    // using the stack
+    TreeNode prev = null;
     public boolean isValidBST(TreeNode root) {
-           check(root);
 
-           for (int i=1; i <data.size(); i+=1){
-               if (data.get(i-1) >= data.get(i)){
-                  return false;
-               }
-              
-           }
-           return true;
+        if ( root == null ){
+            return true;
+        }
+
+        boolean r1 = isValidBST(root.left);
+        if ( r1  == false ) {
+            return false;
+        }
+        if ( prev!=null && prev.val >= root.val ){
+            return false;
+        }
+        prev = root;
+        boolean r2 = isValidBST(root.right);
+        if ( r2  == false ){
+            return false;
+        }
+
+        return true;
         
     }
 }
