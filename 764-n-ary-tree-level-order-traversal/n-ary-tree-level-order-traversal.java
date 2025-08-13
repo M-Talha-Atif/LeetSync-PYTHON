@@ -19,38 +19,35 @@ class Node {
 
 class Solution {
     public List<List<Integer>> levelOrder(Node root) {
+        Queue<Node> que = new LinkedList<>();
+        List<List<Integer>> levels = new ArrayList<>();
+        if (root == null) return levels;
+        que.offer(root);
+        while ( !que.isEmpty() ){
+            int countNodes = que.size();
+            List<Integer> level = new ArrayList<>();
+            for (int i=0; i<countNodes; i++)
+            {
+                Node peek = que.peek();
 
-    
-        List<List<Integer>> explored = new LinkedList<List<Integer>>();
+                for (Node child : peek.children){
+                    if (child!=null)
+                        que.offer(child);
+                }
 
-        if(root==null) return explored;
-
-
-        Queue<Node> queue = new LinkedList<>();
-
-     
-
-        // offer, poll to remove
-        queue.offer(root);
-
-        while( !queue.isEmpty() ){
-    
-            List<Integer> localList = new LinkedList<>();
-            int len = queue.size();
-            // locally store size because it will change inside the loop
-
-            for (int i=0; i<len; i+=1){
-                Node curr = queue.poll();
-                localList.add(curr.val);
-                for(Node child : curr.children) { queue.offer(child);  }
+                // loop for children
+                level.add( peek.val);
+                // pop the top node after adding its children in que
+                que.poll();
 
             }
 
-            explored.add(localList);
+            levels.add(level);
+            
+        }
 
-         }
-
-         return explored;
+        return levels;
         
+
     }
 }
