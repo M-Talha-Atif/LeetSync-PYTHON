@@ -14,31 +14,26 @@
  * }
  */
 class Solution {
-    public TreeNode helper(int[] preorder, int[] inorder, int[] rootIndex, int left, int right){
-           if (left>right){
-            return null;
-           }
-           int pivot = left;
+   int preIndex = 0;
+Map<Integer, Integer> idxMap = new HashMap<>();
 
-           while(  inorder[pivot] != preorder[rootIndex[0]]  ) pivot+=1;
+TreeNode buildTree(int[] preorder, int[] inorder) {
+    preIndex = 0;
+    idxMap.clear();
+    for (int i = 0; i < inorder.length; i++) idxMap.put(inorder[i], i);
+    return build(preorder, 0, inorder.length - 1);
+}
 
-           rootIndex[0]+=1;
+TreeNode build(int[] preorder, int left, int right) {
+    if (left > right) return null;
 
-           TreeNode newNode = new TreeNode(inorder[pivot]);
+    int rootVal = preorder[preIndex++];
+    TreeNode root = new TreeNode(rootVal);
 
-           newNode.left = helper(preorder,inorder,rootIndex,left,pivot-1);
+    int mid = idxMap.get(rootVal);  // O(1)
+    root.left = build(preorder, left, mid - 1);
+    root.right = build(preorder, mid + 1, right);
 
-           newNode.right = helper(preorder,inorder,rootIndex,pivot+1,right);
-
-           return newNode;
-
-
-
-    }
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-
-        int[] rootIndex = {0};
-        return helper(preorder,inorder,rootIndex,0,inorder.length-1);
-
-    }
+    return root;
+}
 }
