@@ -9,7 +9,7 @@ Each call will get its copy of temporary list and also of start
     */
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
-        Arrays.sort(nums);
+   
         backtrack(list, new ArrayList<>(), nums, 0);
         return list;
     }
