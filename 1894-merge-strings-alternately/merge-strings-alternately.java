@@ -1,35 +1,36 @@
 class Solution {
     public String mergeAlternately(String word1, String word2) {
+        // two pointers, comparison of characters
 
-        StringBuilder data = new StringBuilder();
+        String newWord = "";
+        int n1= word1.length();
+        int n2= word2.length();
+        int i=0, j=0;
 
-        int a1 = word1.length();
-        int a2 = word2.length();
-
-        int length = Math.min(a1,a2);
-
-        for(int i=0; i<length;i+=1){
-            data.append(word1.charAt(i));
-            data.append(word2.charAt(i));
+        while (  i < n1 && j < n2 )
+            
+        {   char a = word1.charAt(i);
+            char b = word2.charAt(j);
+            newWord += a;
+            i+=1;
+            newWord += b;
+            j+=1;
+    
         }
 
-        if(a1>a2){
-            for(int i=length; i<a1; i++){
-                data.append(word1.charAt(i));
-            }
+        while (  i < n1 )
+        {   char a = word1.charAt(i);
+            newWord += a;
+            i+=1;
         }
-        else if(a2>a1){
-
-             for(int i=length; i<a2; i++){
-                data.append(word2.charAt(i));
-            }
+         while (  j < n2 )
+        {   char b = word2.charAt(j);
+            newWord += b;
+            j+=1;
         }
 
-        
 
-
-
-        return data.toString();
+        return newWord;
         
     }
 }
