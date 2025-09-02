@@ -7,6 +7,35 @@ class Solution {
         // sub1 is s1
         // sub2 is s2
         // s1 is s2 so can write as s1 + s1 
+        // Time Complexity = O(n log n + k^n)
+        // Space Complexity = O(k + n)   // buckets + recursion stack
+
+// nums = [4,3,2,3,5,2,1], k = 4
+
+// sort ascending → [1,2,2,3,3,4,5]
+
+// target = 20/4 = 5
+
+// call → backtrack(nums, 6, buckets=[0,0,0,0], target=5)
+
+// Steps:
+
+// pick 5 → bucket[0]=5 → [5,0,0,0] ✅
+
+// pick 4 → bucket[0]=9 ❌ → bucket[1]=4 → [5,4,0,0] ✅
+
+// pick 3 → bucket[0]=8 ❌ → bucket[1]=7 ❌ → bucket[2]=3 → [5,4,3,0] ✅
+
+// pick 3 → bucket[3]=3 → [5,4,3,3] ✅
+
+// pick 2 → goes into bucket[2]=5 → [5,4,5,3] ✅
+
+// pick 2 → goes into bucket[3]=5 → [5,4,5,5] ✅
+
+// pick 1 → goes into bucket[1]=5 → [5,5,5,5] ✅
+
+// base case hit → true
+
         
     
     public boolean canPartitionKSubsets(int[] nums, int k) {
@@ -16,7 +45,7 @@ class Solution {
         if (totalSum % k != 0) return false;
         int target = totalSum / k;
         
-        // Sort descending (place bigger numbers first)
+        // Sort ascending
         Arrays.sort(nums);
         int n = nums.length;
         if (nums[n - 1] > target) return false; // largest number > target → impossible
@@ -33,6 +62,9 @@ class Solution {
             }
             return true;
         }
+
+        // 5,4,3,3,2,2,1
+        // 5,
         
         int num = nums[index];
         for (int i = 0; i < buckets.length; i++) {
