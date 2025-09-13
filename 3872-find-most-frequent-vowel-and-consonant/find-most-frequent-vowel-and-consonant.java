@@ -1,34 +1,22 @@
 class Solution {
     public int maxFreqSum(String s) {
-        int[] freq = new int[26];
-
-        s.chars().forEach(  c -> freq[c - 'a'] += 1 );
-
-        int maxVowel = 0;
-        int maxConsonants = 0;
-
-        for (int i = 0; i < freq.length; i++) {
-
-            if ( i==0 || i==4 || i==8 || i==14 || i==20){
-                maxVowel = Math.max(freq[i],maxVowel);
+        int[] freq= new int[27];
+        int maxiVowel = 0;
+        int maxiConsonant = 0;
+        for ( char c: s.toCharArray() ){
+            freq[ (int)c - 97] +=1 ;
+            if ( isVowel(c) ){
+                maxiVowel = Math.max( freq[(int)c - 97], maxiVowel );
             }
             else {
-                maxConsonants  = Math.max(freq[i],maxConsonants );
+                maxiConsonant = Math.max( freq[(int)c - 97], maxiConsonant );
             }
-           
         }
-
-        return maxConsonants  +  maxVowel;
-
-        
-
-
+        return maxiVowel + maxiConsonant;
         
     }
 
-
-   boolean checkVowel(char c) {
-    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
-}
-
+    boolean isVowel(char check){
+        return check=='a' || check=='e' || check=='i' || check=='o' || check=='u';
+    }
 }
