@@ -1,27 +1,31 @@
-public class Solution {
+class Solution {
     public int numDecodings(String s) {
-        if (s == null || s.length() == 0 || s.charAt(0) == '0') {
+        int n = s.length();
+        int[] d = new int[n+1];
+
+        if (n==0) {
             return 0;
         }
 
-        int n = s.length();
-        int[] dp = new int[n + 1];
-        dp[0] = 1;
-        dp[1] = 1;
-
-        for (int i = 2; i <= n; ++i) {
-            int oneDigit = s.charAt(i - 1) - '0';
-            int twoDigits = Integer.parseInt(s.substring(i - 2, i));
-
-            if (oneDigit != 0) {
-                dp[i] += dp[i - 1];
-            }
-
-            if (10 <= twoDigits && twoDigits <= 26) {
-                dp[i] += dp[i - 2];
-            }
+        int[] number = new int[n+1];
+        for(int i = 0; i < n; i++) {
+            number[i+1] = s.charAt(i) - '0';
         }
 
-        return dp[n];
+        d[0] = 1;
+        d[1] = number[1] != 0 ? 1 : 0;
+
+        for(int i = 2; i <= n; i++) {
+            if (number[i] != 0) {
+                d[i] = d[i] + d[i-1];
+            }
+            int lastTwoDigits = number[i-1]*10 + number[i];
+            if (lastTwoDigits<= 26 && lastTwoDigits>=10) {
+                d[i] = d[i] + d[i-2];
+            }
+
+            // System.out.println(number[i] + " --- " + lastTwoDigits + " --- " + d[i]);
+        }
+        return d[n];
     }
 }
