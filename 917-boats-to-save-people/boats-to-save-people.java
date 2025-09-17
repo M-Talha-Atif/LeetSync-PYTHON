@@ -9,14 +9,14 @@ class Solution {
         int boats = 0;
         while (left <= right){
             int remaining = limit - people[right];
-            if ( remaining  ==  0){
-                right-=1;
-            }
-            else if ( remaining  >  0 && remaining - people[left] >=0 ){
+    
+            if ( remaining  >  0 && remaining - people[left] >=0 ){
+                // two boats consume
                 right-=1;
                 left+=1;
             }
             else {
+                // one boat consume
                 right-=1;
             }
             boats+=1; 
