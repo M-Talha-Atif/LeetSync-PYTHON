@@ -47,7 +47,7 @@ class Solution {
                     while(left<right && lefty == nums[left+1]) left+=1;
                     while(left<right && righty == nums[right-1]) right-=1;
 
-                    right-=1;
+                    right-=1; // can be left+=1
                     
                 }
                 else if( target >0){ right-=1;}
