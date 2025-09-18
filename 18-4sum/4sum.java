@@ -58,8 +58,10 @@ class Solution {
 
                myResult.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
 
+               int temp = nums[left];
+
                // c duplicate
-               while(left<right && nums[left]==nums[left+1]){
+               while(left<right && temp==nums[left+1]){
                 left+=1;
                }
               // d duplicate
