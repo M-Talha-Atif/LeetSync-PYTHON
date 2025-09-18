@@ -57,11 +57,9 @@ class Solution {
                             left += 1;
                         while (left < right && righty == nums[right - 1])
                             right -= 1;
-                        // to move for further quadrlets
-                        // two fixed numbers, so move both pointers to avoid duplicate
-                        left += 1;
+                        // to move for further quadrlets     
+                        left += 1; // you can do either righ-=1
                       
-
                     }
 
                 }
