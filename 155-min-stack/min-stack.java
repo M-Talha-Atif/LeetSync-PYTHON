@@ -3,6 +3,8 @@ class MinStack {
     Stack<Integer> myStack;
 
     // current value is maintained with previous minimum
+    // maintain previous minimum with current minimum
+    // pop two times if popped is equal to minimum, swiching to previous minimum
 
 
     public MinStack() {
@@ -15,8 +17,7 @@ class MinStack {
          myStack.push(myMin);
          myMin = val; // update the minimum
 
-        }
-        
+        } 
         myStack.push(val);
 
         // System.out.println(myStack);
