@@ -1,46 +1,38 @@
 class MinStack {
-    int myMin = Integer.MAX_VALUE;
-    Stack<Integer> myStack;
+    Node head;
+    static class Node{
+        int val;
+        int min;
+        Node next;
 
-    // current value is maintained with previous minimum
-    // maintain previous minimum with current minimum
-    // pop two times if popped is equal to minimum, swiching to previous minimum
-
-
+        public Node(int val,int min,Node node){
+            this.val= val;
+            this.min = min;
+            this.next=node;
+        }
+    }
     public MinStack() {
         
-        myStack = new Stack<Integer>();
     }
     
     public void push(int val) {
-        if(val<=myMin){
-         myStack.push(myMin);
-         myMin = val; // update the minimum
-
-        } 
-        myStack.push(val);
-
-        // System.out.println(myStack);
-        
+        if(head==null){
+            head = new Node(val,val,null);
+        }else{
+            head= new Node(val,Math.min(val,head.min),head);
+        }
     }
     
     public void pop() {
-        
-        int popped = myStack.pop();
-        if(popped == myMin){
-            myMin = myStack.pop();
-        }
-
+        head= head.next;
     }
     
     public int top() {
-        return myStack.peek();
+        return head.val;
     }
     
     public int getMin() {
-
-        return myMin;
-        
+        return head.min;
     }
 }
 
