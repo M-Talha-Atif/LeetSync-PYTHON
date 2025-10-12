@@ -1,25 +1,25 @@
 class Solution {
     public int minCostClimbingStairs(int[] cost) {
-        // pick, not pick
-        Map<Integer,Integer> memo = new HashMap<Integer, Integer>();
+        // either climb one or two
 
-        return Math.min(minCostClimbingStairs(cost, memo,0), minCostClimbingStairs(cost, memo,1) );
+        // let say start from 0 
+        int first=cost[0]; // 
+        int second=cost[1]; // 
+        int n = cost.length;
+        if ( n<=2 ) return Math.min(first, second);
+        for ( int i=2; i<n; i++){
+            int current = cost[i] + Math.min(first,second);
+            first = second;
+            second = current;
+        }
+
+        return Math.min(first,second);
+        // index 1 value depend on index 0
+        // index 2 value depend on 0 and 1
+
+        
         
     }
-    private int minCostClimbingStairs(int[] cost, Map<Integer,Integer> memo, int index ){
-        if ( index>= cost.length){
-            return 0; // base case
-        }
 
-        if ( !memo.containsKey(index)){
-            // current value + either next one by increment of 1 or 2
-            int pick = cost[index] + minCostClimbingStairs(cost, memo, index+1);
-            int nPick = cost[index] + minCostClimbingStairs(cost, memo, index+2);
-            int res = Math.min(pick, nPick);
-            memo.put( index, res);
-        }
 
-        return memo.get(index);
-
-     }
 }
