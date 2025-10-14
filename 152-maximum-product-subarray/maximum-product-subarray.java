@@ -1,23 +1,25 @@
 class Solution {
     // demanding a integer from sub array
     public int maxProduct(int[] nums) {
-        // a sub array with maximum product
-        // -10 to 10
-        // brute force approach
+        int preFixProduct = 1;
+        int suffixProduct = 1;
         int n = nums.length;
-        // nested loop -> Big O of n^2
-        // 2 with 3,-2,4
-        // 3 wiht -2,4
+        // every element start and end could be answer/
         int res = -11;
         for (int i = 0; i < n; i++) { // outside loop
-            int localProduct = nums[i];
-            res = Math.max( localProduct, res);
-            for (int j = i+1; j < n; j++) { // inside loop
-                localProduct *= nums[j];
-                res = Math.max( localProduct, res);
 
+           if (preFixProduct == 0){
+                preFixProduct = 1; // reset when zero comes
             }
-            
+            if (suffixProduct == 0){
+                suffixProduct = 1; // reset when zero comes
+            }
+       
+            suffixProduct *= nums[n-i-1]; // last element starting from right
+            preFixProduct *= nums[i]; // first element starting from left
+         
+            res = Math.max( Math.max(suffixProduct,preFixProduct) , res);
+
         }
 
         return res;
