@@ -50,6 +50,15 @@ AND:
         // if key is 0
         // then 1 0 1 & 0 0 1 is  0 0 1, return true
 
+        // When key % 32 == 31 (e.g., key 31, 63, 95, etc.), the mask is 1 << 31 → sign bit → result is negative → >0 fails.
+        /*
+Java int is signed 32‑bit (two’s complement)
+Bit 31 (the leftmost bit) is the sign bit:
+
+0 → number is positive (or zero).
+
+1 → number is negative */
+
         return  ( num[ getIdx(key)] & getMask(key) ) !=0; 
         
     }
