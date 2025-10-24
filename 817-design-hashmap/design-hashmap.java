@@ -22,6 +22,11 @@ class MyHashMap {
     private int hash(int key) {
         return key % SIZE;
     }
+
+    // 3 cases
+    // first key not in linked list
+    // updatin the value of key linked list
+    // new key in same linked list
     
     public void put(int key, int value) {
         int index = hash(key);
