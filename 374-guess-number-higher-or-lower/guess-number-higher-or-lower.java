@@ -9,30 +9,28 @@
 
 public class Solution extends GuessGame {
     public int guessNumber(int n) {
-        // search space is 1 to n, sorted
+        // search space define
         int left = 1;
         int right = n;
-        // reduce search space accoridng to 1,-1,0
-
-        while ( left < right ){
-            int mid = left + (right - left) / 2;
-            int target = guess(mid);
-
-            if (target == 0){
+        // define the search space
+        while ( left < right){
+            int mid = left + ( right - left ) / 2; 
+            int result = guess(mid);
+            if (result == 0){
                 return mid;
             }
-            else if (target == -1){
-                // reduce search space from right
-                right = mid;
-            }
+            else if ( result == -1){
+                // reduce search space from right side
+                
+                 right = mid;
+            } 
             else {
-                // reduce search search space from left
-                left = mid + 1;
+              left = mid + 1;
             }
 
         }
 
-        return right;
+        return left;
 
         
     }
