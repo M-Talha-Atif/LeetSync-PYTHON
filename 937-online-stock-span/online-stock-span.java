@@ -1,26 +1,27 @@
 class StockSpanner {
-
-   Stack<int[]> stack = new Stack<>();
+    // price, 1
+    // keep checking less values in a stack
+    Stack<int[]> stack;
 
     public StockSpanner() {
         stack = new Stack<>();
         
     }
-    // key-value
-
-    // key price , res prices less than key, monotonic stack
-    // next values less than key
+    // keep removing less values than current value
+    // 100 -- 1
+    // 80 -- 1
+    // 60 -- 1
+    // 70 -- 2
     
     public int next(int price) {
-        // storing the result after the loop
-        int res = 1;
-
-        while(  !stack.isEmpty() && stack.peek()[0]  <= price ){
+        int res = 1; // when stack empty
+        // check values being less than current stock price
+        while (!stack.isEmpty() && stack.peek()[0] <= price ){
             res += stack.pop()[1];
         }
 
-        stack.push(new int[]{price,res});
-
+        stack.push( new int[] {price,res} );
+        
         return res;
         
     }
