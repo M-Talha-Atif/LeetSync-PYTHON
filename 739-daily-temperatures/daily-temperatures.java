@@ -1,4 +1,8 @@
-class Solution {
+
+        // goal is to keep the index and value of temperature in the data structure
+        /// so why not queue, queue is fifo
+        // so stack is lifo
+    class Solution {
     class Pair {
         Integer key;
         Integer value;
@@ -47,3 +51,5 @@ class Solution {
 // 74 ->
 
 // 73 
+        
+ 
