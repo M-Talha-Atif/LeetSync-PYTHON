@@ -1,84 +1,46 @@
 class MyQueue {
 
     Stack<Integer> data;
-    int top;
 
-    // 1 2 3 4 5 6
+    // 1 2 
+    // 
 
     public MyQueue() {
-        data =  new Stack<>();
-        top = 0;
-        
+        data =  new Stack<>();  
     }
+    // 1 --> 1
+    // 2
     
     public void push(int x) {
         // add element to stack
-
-        if(data.isEmpty()){
-            top = x;
+        // 1 2
+        // 2 1
+        // reserver 
+        Stack<Integer> temp = new Stack<>(); 
+        // preserved old elements
+        while (!data.isEmpty()){
+            temp.push(data.pop());
         }
 
+        // stack empty 
         data.push(x);
-
+        
+        // push reserved back to main stack
+        while (!temp.isEmpty()){
+            data.push(temp.pop());
+        }
        
     }
     
     public int pop() {
-        ArrayList<Integer> gotList = new ArrayList<Integer>();
-
-        int popped = 0;
-
-
-    // 1 2 3 4 
-    // 4 3 2 1
-
-    // 2 3 4
-
-    
-
-        while(!data.isEmpty()) {
-
-            int element = data.pop();
-
-            gotList.add(element);
-
-            top  = popped; // previous element than popped
-
-            popped = element;
-        }
-
-        // 4 3 2 || 1
-
-        // 4 3 2
-
-        // 5 4 3 2 -- 1
-        //  
-        // 6 5 4 3 2 
-        // skip element from last one
-
-        // stack like 1 2 3 4 5
-        // in list 5 4 3 2 1
-        // so start from 2nd last by skipping last element and go upto the end till 5
-        // 2 3 4 5 -> again stack like 2 3 4 5
-        // top is 5
-        // System.out.println(gotList);
-        for(int i=gotList.size() - 2; i >= 0 ; i--) {
-            int element = gotList.get(i);
-
-            data.push(  element );
-
-            
-
-        } 
-
-        return popped;
+       
+        return data.pop();
         
-
         
     }
     
     public int peek() {
-        return top;
+        return data.peek();
     }
     
     public boolean empty() {
