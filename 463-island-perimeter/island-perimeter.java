@@ -1,38 +1,28 @@
 class Solution {
     public int islandPerimeter(int[][] grid) {
+        // P=2(l+w)
+        // see previous cell to make intitutions
         int rows = grid.length;
         int cols = grid[0].length;
-        int perimeter = 0;
-
-        for (int r = 0; r < rows; r++) {
-            for (int c = 0; c < cols; c++) {
-                // land found, explore it
-                if (grid[r][c] == 1) {
-                    perimeter += dfs(grid, r, c);
+        int perimiter = 0;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (grid[row][col] == 1) {
+                    perimiter += 4;
+                    // check inside to subtract -2 for neighbours
+                    if (row > 0 && grid[row - 1][col] == 1) {
+                        perimiter -= 2;
+                    }
+                    if (col > 0 && grid[row][col - 1] == 1) {
+                        perimiter -= 2;
+                    }
                 }
+
             }
+
         }
 
-        return perimeter;
-    }
+        return perimiter;
 
-    private int dfs(int[][] grid, int r, int c) {
-        // Base cases , if land not found or out of boundary
-        if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length || grid[r][c] == 0) {
-            return 1; // Water contributes 1 to perimeter
-        }
-        
-        if (grid[r][c] == -1) {
-            return 0; // Already visited land cell
-        }
-
-        // Mark cell as visited
-        grid[r][c] = -1;
-
-        // Explore neighbors (up, down, left, right)
-        return (dfs(grid, r + 1, c) +
-                dfs(grid, r - 1, c) +
-                dfs(grid, r, c + 1) +
-                dfs(grid, r, c - 1));
     }
 }
