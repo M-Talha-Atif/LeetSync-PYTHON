@@ -1,9 +1,5 @@
 class Solution {
     public boolean containsDuplicate(int[] nums) {
-        // xor operator
-        // 1^1, 0^0 == 0
-        // Space Complexity = Auxiliary Space + Input Space
-        // Time Complexity = running time of a program depending on input size
         
         HashSet<Integer> data = new HashSet<Integer>();
 
@@ -15,6 +11,5 @@ class Solution {
         }
 
         return false;
-        
     }
 }
