@@ -1,18 +1,18 @@
 class Solution {
     public int[] getConcatenation(int[] nums) {
-        // 1,2,1 -- 1,2,1
-        // 2 times placement
-        // n * 2 -> size 
-        int n = nums.length;
-        // intially array all elements are zero
-        int[] result = new int[n*2];
-        System.out.println( result[0] );
-        for(int i=0; i<n; i++){
-            result[i] = nums[i];
-            result[i+n] = result[i]; 
+        int n = nums.length*2;
+        int length = nums.length;
+        int[] res = new int[n];
+        // 0,1,2,
+        // 6 -> 0, 1, 2
+        // 0, 1, 2, 3 , 4, 5 
+       
+
+        for (int i=0; i<n; i++){
+            res[ i ] = nums[ i % length ];
         }
 
-        return result;
+        return res;
         
     }
 }
