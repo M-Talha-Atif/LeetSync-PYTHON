@@ -19,9 +19,7 @@ class Solution {
                 }
 
             }
-
         }
-
         return perimiter;
 
     }
