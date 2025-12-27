@@ -1,7 +1,6 @@
 class Solution {
     public int islandPerimeter(int[][] grid) {
-        // P=2(l+w)
-        // see previous cell to make intitutions
+        // 1 side connecting both sides so minus 2 that's why
         int rows = grid.length;
         int cols = grid[0].length;
         int perimiter = 0;
@@ -22,5 +21,6 @@ class Solution {
         }
         return perimiter;
 
+        
     }
 }
