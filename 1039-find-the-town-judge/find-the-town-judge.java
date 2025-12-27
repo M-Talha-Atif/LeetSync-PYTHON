@@ -1,28 +1,21 @@
 class Solution {
     public int findJudge(int n, int[][] trust) {
-        // directed graph
-        // indegree equals n and outdgree equals zero such a node to be find
-        int rows = trust.length;
-      
-
-        int[] trusting = new int[n+1];
-        for ( int i=1; i<=n; i++){
-            trusting[i] = 0;
+        
+        int inDegree[] = new int[n+1];
+        int outDegree[] = new int[n+1];
+        // out Degree of a node zero that's the judge and indegree == n-1
+        for ( int t[]: trust){
+            int a = t[0];
+            int b = t[1];
+            inDegree[b]++; // trust
+            outDegree[a]++; // a guy who is trusting
         }
-      
-       ;
-        for ( int row=0; row<rows; row+=1)
-        {   
-
-            trusting[  trust[row][0] ] -=1; // no trust
-            trusting[  trust[row][1] ] +=1; // trust build
-
-        }
-        for ( int i=1; i<=n; i++){
-            if ( trusting[i] == n-1 ) return i; 
+         for (int num=1; num<=n; num++){
+            if ( outDegree[num]== 0 && inDegree[num] == n-1){
+                return num;
+            }
         }
 
         return -1;
-        
     }
 }
