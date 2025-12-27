@@ -1,30 +1,35 @@
 class Solution {
     public int numIslands(char[][] grid) {
-        int count = 0;
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int island=0;
+        for ( int row =0; row<rows; row++)
+        {
+            for ( int col =0; col<cols; col++){
 
-        for (int r = 0; r < grid.length; r++) {
-            for (int c = 0; c < grid[0].length; c++) {
-                if (grid[r][c] == '1') {
-                    count++;
-                    dfs(grid, r, c);
+                if (   grid[row][col] != '0' ){
+
+                    island+=1;
+
+                    dfs( grid, row, col, rows, cols);
+
                 }
             }
         }
 
-        return count;
+        return  island;
+        
     }
 
-    private void dfs(char[][] grid, int r, int c) {
-        if (r < 0 || c < 0 || r >= grid.length || c >= grid[0].length
-            || grid[r][c] == '0') {
-            return;
-        }
+    public void dfs(char[][] grid, int row, int col, int rows, int cols){
+        // out of index check
+        if ( row>=rows || col>=cols || row<0 || col<0 || grid[row][col] == '0' ) return; // no more further explore
 
-        grid[r][c] = '0'; // mark as visited
-
-        dfs(grid, r + 1, c);
-        dfs(grid, r - 1, c);
-        dfs(grid, r, c + 1);
-        dfs(grid, r, c - 1);
+        grid[row][col] = '0'; // mark visited
+        // different directions iteration, up down left right
+        dfs( grid, row-1, col, rows, cols);
+        dfs( grid, row+1, col, rows, cols);
+        dfs( grid, row, col-1, rows, cols);
+        dfs( grid, row, col+1, rows, cols);
     }
 }
