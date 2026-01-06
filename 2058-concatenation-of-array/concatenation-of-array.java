@@ -1,15 +1,17 @@
 class Solution {
     public int[] getConcatenation(int[] nums) {
-        int n = nums.length*2;
-        int length = nums.length;
-        int[] res = new int[n];
-        // 0,1,2,
-        // 6 -> 0, 1, 2
-        // 0, 1, 2, 3 , 4, 5 
-       
 
-        for (int i=0; i<n; i++){
-            res[ i ] = nums[ i % length ];
+        int n = nums.length;
+        int resLength = n*2;
+
+        int[] res = new int[resLength];
+
+        for ( int i=0; i < resLength; i++)
+        {  
+            // 0,1,2,3,4,5
+            // 3%3 is 0
+            res[i] = nums[ i % n ];
+            
         }
 
         return res;
