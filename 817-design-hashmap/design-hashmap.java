@@ -1,4 +1,5 @@
-class ListNode {
+class MyHashMap {
+   class ListNode {
     int key;
     int value;
     ListNode next;
@@ -10,82 +11,94 @@ class ListNode {
     }
 }
 
-class MyHashMap {
-    private static final int SIZE = 100000; // Smaller size for simplicity
+
     private ListNode[] buckets;
-    
+    int SIZE = 100000;
+
     public MyHashMap() {
+
         buckets = new ListNode[SIZE];
+
     }
-    
-    // Simple hash function
+
+     // Simple hash function
     private int hash(int key) {
         return key % SIZE;
     }
-
-    // 3 cases
-    // first key not in linked list
-    // updatin the value of key linked list
-    // new key in same linked list
     
     public void put(int key, int value) {
-        int index = hash(key);
-        
-        // If bucket is empty, just add new node
-        if (buckets[index] == null) {
-            buckets[index] = new ListNode(key, value);
-            return;
+        int hashKey = hash(key);
+        if ( buckets[hashKey] == null) {
+           buckets[hashKey] = new ListNode(key,value);
+           return; // new node, as head
         }
-        
-        // Otherwise, check if key exists
-        ListNode current = buckets[index];
+
+        // check if key already exists
         ListNode prev = null;
-        
-        while (current != null) {
-            if (current.key == key) {
-                // Update existing key
-                current.value = value;
+        ListNode current = buckets[hashKey];
+        // find null so that new node can be added
+        while ( current != null ){
+            if ( current.key == key ){
+                current.value = value; // replace the value of that key, update
                 return;
             }
             prev = current;
-            current = current.next;
+            current = current.next; // move to next node
         }
-        
-        // Key doesn't exist, add to end of list
-        prev.next = new ListNode(key, value);
+        // add a new node
+        prev.next = new ListNode(key,value);
     }
     
     public int get(int key) {
-        int index = hash(key);
-        ListNode current = buckets[index];
-        
-        while (current != null) {
-            if (current.key == key) {
+        int hashKey = hash(key);
+         if ( buckets[hashKey] == null) {
+           return -1; // not present
+        }
+
+        ListNode current = buckets[hashKey];
+        // find null so that new node can be added
+        while ( current != null ){
+            if ( current.key == key ){
                 return current.value;
             }
-            current = current.next;
+            current = current.next; // move to next node
         }
+
+        return -1;
         
-        return -1; // Not found
     }
     
     public void remove(int key) {
-        int index = hash(key);
-        ListNode current = buckets[index];
+        int hashKey = hash(key);
+
+         // check if key already exists
         ListNode prev = null;
-        
-        while (current != null) {
-            if (current.key == key) {
-                if (prev == null) {
-                    // Remove head of list
-                    buckets[index] = current.next;
-                } else {
-                    prev.next = current.next;
+        ListNode current = buckets[hashKey];
+        // find null so that new node can be added
+        while ( current != null ){
+            if ( current.key == key ){
+                if ( prev == null ){
+                    // key as head
+                    buckets[hashKey] = current.next;
+                } // it will be in the middle
+                else {
+                    prev.next = prev.next.next;
                 }
+                
                 return;
             }
             prev = current;
-            current = current.next;
+            current = current.next; // move to next node
         }
+
+        
     }
 }
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap obj = new MyHashMap();
+ * obj.put(key,value);
+ * int param_2 = obj.get(key);
+ * obj.remove(key);
+ */
