@@ -1,37 +1,27 @@
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        // counter for counting elements
-        Map<Integer, Integer> counter = new HashMap<> ();
-        List<Integer>[] bucket = new List[nums.length + 1];
+        // take frequency as a key in sorted array and value as a number
+        // conver a map to a list and sort by frequency
+        HashMap<Integer,Integer> frequencyMap = new HashMap<Integer,Integer>();
+        // count each numbers frequency
+        for ( int num : nums )
+        {
+                frequencyMap.put ( num, frequencyMap.getOrDefault(num, 0) + 1); 
+        }
+        List<Map.Entry<Integer,Integer>> list = new ArrayList<>(frequencyMap.entrySet());
+        list.sort( (a,b) -> b.getValue() - a.getValue() ); // sort by frequency
 
-        // storing the count
-        for(int n : nums){
-            counter.put(n, counter.getOrDefault(n,0) + 1);
+        int[] res = new int[k];
+        for ( int i=0; i<k; i++){
+            res[i] = list.get(i).getKey();
         }
 
-        for(int key : counter.keySet()){
-            int freq = counter.get(key);
-            if(bucket[freq] == null ) {bucket[freq]= new ArrayList<>() ;}
-            
-            bucket[freq].add(key);
-        }
-
-        List<Integer> result = new ArrayList<>();
+        return res;
 
 
-        for(int start = bucket.length-1; start>=0 && result.size()<k ; start-=1){
-
-            if(bucket[start] != null){
-    
-                result.addAll(bucket[start]);
-            }
-        }
-
-        // to convert the list into array
-
-        return result.stream().mapToInt(Integer::intValue).toArray();
 
     
+        
         
     }
 }
