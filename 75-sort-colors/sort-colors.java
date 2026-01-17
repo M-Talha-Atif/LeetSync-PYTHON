@@ -1,22 +1,28 @@
 class Solution {
     public void sortColors(int[] nums) {
-        int countZeros=0, countOnes=0, countTwos=0;
+        // dutch national flag approach
+        int left=0, right = nums.length-1, mid =0;
 
-        for ( int n : nums){
-            if ( n  == 0){
-                countZeros+=1;
+        while ( mid<=right ){
+            if (nums[mid] == 0){
+                // 0 should be on left
+                int temp = nums[mid];
+                nums[mid] = nums[left];
+                nums[left] = temp;
+                left+=1;
+                mid+=1;
             }
-            else if ( n  == 1){
-                countOnes+=1;
+            else if (nums[mid] == 1){
+              mid++; // 1 will remain in middle
             }
             else {
-                countTwos=0;
+                int temp = nums[mid];
+                nums[mid] = nums[right];
+                nums[right] = temp;
+                right-=1;
+                
             }
         }
-         for (int i = 0; i < nums.length; i++) {
-            if (i < countZeros) nums[i] = 0;
-            else if (i < countZeros + countOnes) nums[i] = 1;
-            else nums[i] = 2;
-        }
+        
     }
 }
