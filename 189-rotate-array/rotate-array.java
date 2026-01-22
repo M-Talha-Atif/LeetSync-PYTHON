@@ -1,5 +1,6 @@
 class Solution {
     public void rotate(int[] nums, int p) {
+        // reverse technique
 
     
         int n = nums.length;
