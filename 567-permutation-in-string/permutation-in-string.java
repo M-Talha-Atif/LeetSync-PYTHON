@@ -1,54 +1,39 @@
 class Solution {
+
     public boolean checkInclusion(String s1, String s2) {
-        // s1 length fixed
-        if (s1.length() > s2.length()){
-                return false;
-        }
-         
-        Map<Character,Integer> s1Freq = new HashMap<>();
-        Map<Character,Integer> s2Freq = new HashMap<>();
 
-        for (int i=0; i  <  s1.length(); i++){
+        if(s1.length() > s2.length())
+            return false;
 
-            s1Freq.put(s1.charAt(i), s1Freq.getOrDefault( s1.charAt(i) ,0)  +  1);
-            s2Freq.put(s2.charAt(i), s2Freq.getOrDefault( s2.charAt(i), 0)  +  1);
-        }
+        int[] s1Freq = new int[26]; // frequence for s1
+        int[] window = new int[26];
 
-        // System.out.println(s2Freq);
 
-        if (s1Freq.equals(s2Freq)){
-            return true;
-        }
+        // make frequency map
+        for(char c : s1.toCharArray())
+            s1Freq[c - 'a']++;
 
         int left = 0;
         
-        // done till s1.length
-        for (int right= s1.length(); right<s2.length(); right++){
-            // Increase window, add new character
-            char rightChar = s2.charAt(right);
+        // iterate over s2
+        for(int right = 0; right < s2.length(); right++){
 
-            s2Freq.put(rightChar, s2Freq.getOrDefault(rightChar,0)  + 1  );
+            window[s2.charAt(right) - 'a']++;
 
+            // if size exceeds window size then remvoe one chractaer to  keep it to 
+            // s1 size
 
-            // Shrink Window, remove old character
-            char leftChar = s2.charAt(left);
-
-            s2Freq.put(leftChar, s2Freq.get(leftChar)  -  1);
-
-            if (  s2Freq.get(leftChar)==0  ){
-                s2Freq.remove(leftChar);
+            if(right - left + 1 > s1.length()){
+                window[s2.charAt(left) - 'a']--;
+                left++;
             }
-            left++; // keep window according to s1 size
+            // compare frequencies are equal within given window or not
 
-
-            // check 
-            if (s1Freq.equals(s2Freq)){
+            if(Arrays.equals(s1Freq, window)){
                 return true;
             }
-          
         }
 
         return false;
-        
     }
 }
