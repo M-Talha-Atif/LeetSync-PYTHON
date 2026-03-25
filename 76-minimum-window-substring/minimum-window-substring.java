@@ -49,6 +49,7 @@ class Solution {
                     myStart = left;
 
                 }
+                // may need same character again
 
                 map.put( s.charAt(left), map.getOrDefault(s.charAt(left),0) + 1); // increment by 1
 
