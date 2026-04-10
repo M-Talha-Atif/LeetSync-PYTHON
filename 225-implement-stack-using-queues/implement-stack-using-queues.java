@@ -1,60 +1,36 @@
 class MyStack {
-    
-    // 1 2 3 4 5 
-    Queue<Integer> data;
-    int top;
+
+      private Queue<Integer> q;
 
     public MyStack() {
-        data =  new LinkedList<>();
-        top = 0;
+
+        q = new LinkedList<>();
         
     }
     
     public void push(int x) {
-
-        data.offer(x);
-        top = x;
+        q.add(x);
+        for ( int i=0; i<q.size()-1; i++){
+            q.add( q.poll() );
+        }
         
     }
     
     public int pop() {
 
-        ArrayList<Integer> gotList = new ArrayList<Integer>();
-        int popped = 0;
-
-
-
-
-        while(!data.isEmpty()) {
-            int element = data.poll();
-            gotList.add(element);
-            popped = element;
-        }
-
-        // 1 2 3 4 5 6
-        // 1 2 3 4 5
-        for(int i=0; i< gotList.size() - 1; i++) {
-            int element = gotList.get(i);
-
-            data.offer(  element );
-            top  = element;
-
-        } 
-
-        return popped;
+        return q.poll();
         
     }
-
     
     public int top() {
 
-        return top;
+        return q.peek();
         
     }
     
     public boolean empty() {
 
-        return data.isEmpty();
+        return q.isEmpty();
         
     }
 }
