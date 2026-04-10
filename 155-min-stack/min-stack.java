@@ -1,38 +1,46 @@
 class MinStack {
     Node head;
-    static class Node{
+    static class Node {
         int val;
-        int min;
+        int minimum;
         Node next;
-
-        public Node(int val,int min,Node node){
-            this.val= val;
-            this.min = min;
-            this.next=node;
+        public Node( int val, int minimum, Node next){
+            this.val = val;
+            this.minimum = minimum;
+            this.next = next;
         }
     }
+
     public MinStack() {
+        head = null;
+    }
+
+    // insert new node if head is null make new node
+    
+    public void push(int val) {
+        if (head == null){
+            head = new Node(val,val,null); // next will be null
+        }
+        else {
+            int minimum = Math.min( val, head.minimum);
+            head = new Node( val, minimum, head); // next is old head and new head is formed
+        }
         
     }
     
-    public void push(int val) {
-        if(head==null){
-            head = new Node(val,val,null);
-        }else{
-            head= new Node(val,Math.min(val,head.min),head);
-        }
-    }
-    
     public void pop() {
-        head= head.next;
+        // push one node to next for removing value
+        head = head.next;
     }
     
     public int top() {
         return head.val;
+        
     }
     
     public int getMin() {
-        return head.min;
+        return head.minimum;
+        
     }
 }
 
