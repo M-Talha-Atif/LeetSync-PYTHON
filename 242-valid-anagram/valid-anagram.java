@@ -8,13 +8,14 @@ class Solution {
             frequencyCounter.put( c, frequencyCounter.getOrDefault(c,0) + 1);
         }
         for ( char c : t.toCharArray()) {
+            if ( !frequencyCounter.containsKey(c) ) return false;
+
             frequencyCounter.put( c, frequencyCounter.getOrDefault(c,0) - 1);
-        }
-        for ( int frequency : frequencyCounter.values() ) {
-             if ( frequency != 0) return false;
+            
+            if ( frequencyCounter.get(c) == 0) { frequencyCounter.remove(c); }
         }
 
-        return true;
+        return frequencyCounter.isEmpty();
 
         
     }
