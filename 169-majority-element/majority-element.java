@@ -1,15 +1,24 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        int totalNumbers = nums.length;
-        int half = totalNumbers / 2;
-        HashMap<Integer, Integer> frequency = new HashMap<Integer, Integer>();
+        // 
+        int candidate =  0;
+        int count = 0;
 
-        for ( int num : nums ) {
-              frequency.put( num, frequency.getOrDefault(num,0) + 1);
-              if ( frequency.get(num) > half ) return num;
+        for ( int i=0; i<nums.length; i++) {
+             if (count == 0) {
+                candidate = nums[i];
+              }
+              
+              if ( nums[i] == candidate ){
+                    count+=1;
+              }
+              else if ( nums[i] != candidate ){
+                count -=1;
+              }
+             
         }
 
-        return -1;
+        return candidate;
         
     }
 }
