@@ -1,26 +1,20 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        HashMap<Integer,Integer> data = new HashMap<Integer,Integer>();
-        int[] resultIndexes = new int[2];
-        // 2,7
+        // nested loop big o of n^2
+        // hashmap big o of n
+        // key is index
+        // a+b = target, target - b = a, target - a = b
+        HashMap<Integer,Integer> visited = new HashMap<>();
 
-        for( int i=0; i<nums.length; i+=1 )
-        { 
-            int n = nums[i];
-            int check = target - n;
-            // -1 because 0 to n filled by indexes
-            int fetched = data.getOrDefault(check,-1);
-            if ( fetched != -1  ){
-               resultIndexes [0] = fetched;
-               resultIndexes [1] = i;
-               return resultIndexes ;
+        for ( int i=0; i<nums.length; i++) {
+            int complement = target - nums[i];
+            if ( visited.containsKey(complement) ) {
+                return new int[]{ visited.get(complement) , i };
             }
-            data.put( n,  data.getOrDefault(n,i)  );
-
-
+            visited.put( nums[i], i);
         }
 
-        return resultIndexes ;
+        return new int[]{};
         
     }
 }
