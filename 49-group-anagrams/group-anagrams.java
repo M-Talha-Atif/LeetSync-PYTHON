@@ -6,28 +6,29 @@ class Solution {
         // Big O of n log n * n
         Map<String, List<String>> storage = new HashMap<String, List<String>>();
 
+        // e a t - 1 1 1
+       //  t e a - 1 1 1
+       //  g h i - 1 1 1
+
         for ( String anagram : strs){
             // convert to char array
-            char[] chars =  anagram.toCharArray();
-            // sort the string
-            Arrays.sort(chars);
-            // convert back to string
-            String groupedKey = new String(chars);
+            int[] frequencyCounter = new int[26];
+            for ( char c : anagram.toCharArray() ) {
+                frequencyCounter[c - 'a']++;
+            }
+            StringBuilder canonicalKey = new StringBuilder();
 
+            for ( int count : frequencyCounter ) {
+                canonicalKey.append("#").append(count);
+            }
 
-            List<String> anagrams = storage.getOrDefault(groupedKey, new ArrayList<>());
+            List<String> anagrams = storage.getOrDefault(canonicalKey.toString(), new ArrayList<>());
             anagrams.add(  anagram );
-            storage.put(groupedKey, anagrams);
-        }
-
-        List<List<String>> result = new ArrayList<>();
-
-        for ( List<String> list : storage.values() ) {
-            result.add (list);
+            storage.put( canonicalKey.toString() , anagrams);
         }
 
 
-        return result;
+        return new ArrayList<>( storage.values() );
 
 
     }
