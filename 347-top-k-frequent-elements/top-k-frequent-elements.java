@@ -1,27 +1,46 @@
 class Solution {
+
     public int[] topKFrequent(int[] nums, int k) {
-        // take frequency as a key in sorted array and value as a number
-        // conver a map to a list and sort by frequency
-        HashMap<Integer,Integer> frequencyMap = new HashMap<Integer,Integer>();
-        // count each numbers frequency
-        for ( int num : nums )
-        {
-                frequencyMap.put ( num, frequencyMap.getOrDefault(num, 0) + 1); 
+
+        Map<Integer, Integer> frequency = new HashMap<>();
+
+        for (int number : nums)
+            frequency.put(number,
+                    frequency.getOrDefault(number, 0) + 1);
+
+        List<Integer>[] buckets =
+                new ArrayList[nums.length + 1];
+
+        for (int number : frequency.keySet()) {
+
+            int count = frequency.get(number);
+
+            if (buckets[count] == null)
+                buckets[count] = new ArrayList<>();
+
+            buckets[count].add(number);
         }
-        List<Map.Entry<Integer,Integer>> list = new ArrayList<>(frequencyMap.entrySet());
-        list.sort( (a,b) -> b.getValue() - a.getValue() ); // sort by frequency
 
-        int[] res = new int[k];
-        for ( int i=0; i<k; i++){
-            res[i] = list.get(i).getKey();
+        int[] answer = new int[k];
+
+        int index = 0;
+
+        for (int freq = buckets.length - 1;
+             freq >= 1 && index < k;
+             freq--) {
+
+            if (buckets[freq] == null)
+                continue;
+
+            for (int number : buckets[freq]) {
+
+                answer[index++] = number;
+
+                if (index == k)
+                    break;
+            }
         }
 
-        return res;
-
-
-
-    
-        
-        
+        return answer;
     }
 }
