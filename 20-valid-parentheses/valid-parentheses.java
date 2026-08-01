@@ -1,5 +1,7 @@
 class Solution {
     public boolean isValid(String s) {
+        // push opening bracket
+        // check closing bracket
 
         Stack<Character> stack = new Stack();
 
