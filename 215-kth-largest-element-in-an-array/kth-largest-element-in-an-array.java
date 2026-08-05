@@ -1,5 +1,12 @@
 class Solution {
 
+    // min heap
+    // 1 2, 3 comes, now
+    // 2 3, 5 comes, now
+    // 3 5, 6 comes, now
+    // 5 6, now 4 comes 
+
+
     PriorityQueue<Integer> heap = new PriorityQueue<Integer>();
 
     public int findKthLargest(int[] nums, int k) {
@@ -13,21 +20,12 @@ class Solution {
     }
 
      public void add(int val, int k) {
+        heap.offer(val);
 
-        if (heap.size() < k){
-             heap.offer(val);
-        }
-        else if (heap.peek() < val ){
-            // adding value , current peek
-            System.out.println("Adding value: "+ String.valueOf(val));
-            System.out.println("Current Peek: "+heap.peek().toString());
 
-            heap.poll();
-            heap.offer(val);
-
-        }
-
-      
+        if (heap.size() > k){
+             heap.poll();
+        }   
         
     }
 }
