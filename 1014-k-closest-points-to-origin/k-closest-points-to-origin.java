@@ -11,7 +11,7 @@ class Solution {
 
         while (  !que.isEmpty() && k > 0) 
         {
-            myAnswer[--k] = que.remove();
+            myAnswer[--k] = que.poll();
         }
         return myAnswer;
 
