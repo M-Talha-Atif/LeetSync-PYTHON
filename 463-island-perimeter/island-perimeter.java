@@ -1,26 +1,34 @@
 class Solution {
+
     public int islandPerimeter(int[][] grid) {
-        // 1 side connecting both sides so minus 2 that's why
+
         int rows = grid.length;
         int cols = grid[0].length;
-        int perimiter = 0;
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                if (grid[row][col] == 1) {
-                    perimiter += 4;
-                    // check inside to subtract -2 for neighbours
-                    if (row > 0 && grid[row - 1][col] == 1) {
-                        perimiter -= 2;
-                    }
-                    if (col > 0 && grid[row][col - 1] == 1) {
-                        perimiter -= 2;
-                    }
+
+        int perimeter = 0;
+
+        for (int i = 0; i < rows; i++) {
+
+            for (int j = 0; j < cols; j++) {
+
+                if (grid[i][j] == 0) {
+                    continue;
                 }
 
+                perimeter += 4;
+
+                // shared edge with right cell
+                if (j + 1 < cols && grid[i][j + 1] == 1) {
+                    perimeter -= 2;
+                }
+
+                // shared edge with bottom cell
+                if (i + 1 < rows && grid[i + 1][j] == 1) {
+                    perimeter -= 2;
+                }
             }
         }
-        return perimiter;
 
-        
+        return perimeter;
     }
 }
