@@ -59,6 +59,7 @@ class Solution {
                             right -= 1;
                         // to move for further quadrlets     
                         left += 1; // you can do either righ-=1
+                        right-=1;
                       
                     }
 
